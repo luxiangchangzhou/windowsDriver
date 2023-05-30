@@ -1,0 +1,47 @@
+[Version]
+Signature="$WINDOWS NT$"
+Provider=luxiang
+DriverVer=23/5/30,1.0.0.1
+Class=LuxiangClass
+ClassGUID={EF2962F0-0D55-4bff-B8AA-2221EE8A79B0}
+
+[ClassInstall32]
+Addreg=Class_AddReg
+
+[Class_AddReg]
+HKR,,,,LuxiangClass
+HKR,,Icon,,"-5"
+
+[Manufacturer]
+"luxiang manufacturer"=mfg,NTAMD64
+
+[mfg.NTAMD64]
+"lxdevice"=YouMark_DDI, PCI\VEN_9999&DEV_9999
+
+[YouMark_DDI.NTAMD64]
+CopyFiles=File_Section
+
+
+
+[YouMark_DDI.NTAMD64.Services]
+AddService = mydriver1_lx,0x00000002,YouMark_AddService
+
+
+[YouMark_AddService]
+DisplayName = "mydriver1_lx"
+ServiceType = 1 ; SERVICE_KERNEL_DRIVER
+StartType = 3 ; SERVICE_DEMAND_START
+ErrorControl = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\System32\Drivers\MyDriver1.sys
+
+[SourceDisksNames]
+1="test for disk"
+
+[SourceDisksFiles]
+MyDriver1.sys=1
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+
+[File_Section]
+MyDriver1.sys
